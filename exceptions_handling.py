@@ -1,4 +1,5 @@
 import sys
+import os
 from math import log
 
 def convert(s):
@@ -38,8 +39,31 @@ def string_log(s):
     v = convert_raise(s)
     return log(v)
 
+# Look Before You Leap: LBYL -> checks only for file existence
+p = '/path/to/datafile.dat'
 
+if os.path.exists(p):
+    process_file(p)
+else:
+    print('No such file as {}'.format(p))
 
+# It's Easyer to Ask Forgiveness than Permission: EAFP -> mode pythonic approach
+try:
+    process_file(p)
+except OSError as e:
+    print('Could not process file becouse {}'.format(str(e)))
+
+# Clean-up with finally-block that is executed unconcerned of try-except outcome
+def make_at(path, dir_name):
+    original_path = os.getcwd()
+    try:
+        os.chdir(path)
+        os.mkdir(dir_name)
+    except OSError as e:
+        print(e, file=sys.stderr)
+        raise
+    finally:
+        os.chdir(original_path)
 
 """Exceptions types to handle
 
