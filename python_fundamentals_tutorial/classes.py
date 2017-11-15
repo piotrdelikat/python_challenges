@@ -116,31 +116,50 @@ class Flight:
 
 class Aircraft:
 
-    def __init__(self, registration, model, num_rows, num_seats_per_row):
+    def __init__(self, registration):
         self._registration = registration
-        self._model = model
-        self._num_rows = num_rows
-        self._num_seats_per_row = num_seats_per_row
 
     def registration(self):
         return self._registration
 
+    def num_seats(self):
+        rows, row_seats = self.seating_plan()
+        return len(rows) * len(row_seats)
+
+
+class AirbusA319(Aircraft):
+
     def model(self):
-        return self._model
+        return "AirbusA319"
 
     def seating_plan(self):
-        return (range(1, self._num_rows + 1),
-                "ABCDEFGHJK"[:self._num_seats_per_row])
+        return range(1, 23), "ABCDEF"
 
 
-def make_flight():
-    f = Flight("BE757", Aircraft("G-EFTP", "Airbus A319", num_rows=22, num_seats_per_row=6))
+class Boeing777(Aircraft):
+
+    def model(self):
+        return "Boeing777"
+
+    def seating_plan(self):
+        return range(1, 56), "ABCDEGHJK"
+
+
+def make_flights():
+    f = Flight("BE759", AirbusA319("G-EFTP"))
     f.allocate_seat('12A', 'Rickey Martin')
     f.allocate_seat('15F', 'Amber Doom')
     f.allocate_seat('15E', 'Max Pain')
     f.allocate_seat('1C', 'George Smith')
     f.allocate_seat('1D', 'Raul Sam Junior')
-    return f
+
+    g = Flight("AR56", Boeing777("F-GPRS"))
+    g.allocate_seat('3G', 'Norma Dorn')
+    g.allocate_seat('33K', 'Richard Rich')
+    g.allocate_seat('15B', 'Marcel Haisa')
+    g.allocate_seat('11C', 'Xio Ambauta')
+
+    return f, g
 
 
 # You are not compelled to create classes without good reason
