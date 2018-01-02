@@ -54,3 +54,18 @@ print(re.findall(r'\bf[a-z]*', 'Rollo is a french dog lead by fictional facts an
 # Always prefer to use simpler string methods
 text = 'tea or coffee'
 print(text.replace('coffee', 'line'))
+
+#################################################
+# Random
+import random
+
+random.choice(['apple', 'pear', 'banana'])
+
+random.sample(range(100), 10)
+# [30, 12, 3, 7, 89, 41, 70, 33, 92, 28]
+
+random.randrange(6)  # random integer from range
+# 4
+
+random.random()  # random float
+# 0.7909690676817883
