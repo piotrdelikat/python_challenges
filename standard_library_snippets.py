@@ -69,3 +69,30 @@ random.randrange(6)  # random integer from range
 
 random.random()  # random float
 # 0.7909690676817883
+
+#################################################
+# Dates and Times
+from datetime import date
+
+now = date.today()
+print(now)
+# 2018-01-03
+
+# print formated date
+print(now.strftime("%m-%d-%y. %d %b %Y is a %A on the %d day of %B."))
+
+# calendar arithmetic
+birthday = date(1992, 3, 19)
+age = now - birthday
+print(age.days)
+
+#################################################
+# Data Compression
+import zlib
+sample = b'random not meaningful text for testing zlib compression capabilities'
+print(len(sample))
+
+compressed = zlib.compress(sample)
+print(len(compressed))
+
+print(zlib.decompress(compressed))
