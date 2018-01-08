@@ -96,3 +96,12 @@ compressed = zlib.compress(sample)
 print(len(compressed))
 
 print(zlib.decompress(compressed))
+
+#################################################
+# Performance Measurement
+from timeit import Timer
+
+Timer('t=a; a=b; b=t', 'a=1; b=2').timeit()
+# 0.19888181338839023
+Timer('a,b = b,a', 'a=1; b=2').timeit()
+# 0.10682599300641726
